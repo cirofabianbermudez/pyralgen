@@ -27,7 +27,7 @@ def main() -> None:
         "-o",
         "--output",
         type=Path,
-        default=Path("ral_pkg.sv"),
+        default=Path("ral_regs_pkg.sv"),
         help="Output directory",
     )
 

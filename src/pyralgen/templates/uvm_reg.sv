@@ -1,31 +1,79 @@
-{% import 'utils.sv' as utils with context %}
+{%- import 'utils.sv' as utils with context -%}
 
 //------------------------------------------------------------------------------
-// uvm_reg definition
+// uvm_reg() definition
 //------------------------------------------------------------------------------
-{% macro class_definition(node) -%}
+{%- macro class_definition(node) -%}
 {%- if class_needs_definition(node) %}
 // {{get_class_friendly_name(node)}}
 class {{get_class_name(node)}} extends uvm_reg;
 {%- if use_uvm_factory %}
     `uvm_object_utils({{get_class_name(node)}})
-{%- endif %}
+{% endif -%}
+
     {{child_insts(node)|indent}}
+
+    {{covergroup_inst(node)|indent}}
+
     {{function_new(node)|indent}}
+
+    {{sample_values_inst(node)|indent}}
 
     {{function_build(node)|indent}}
 endclass : {{get_class_name(node)}}
 {% endif -%}
-{%- endmacro %}
+{%- endmacro -%}
 
 
 //------------------------------------------------------------------------------
 // Child instances
 //------------------------------------------------------------------------------
-{% macro child_insts(node) -%}
-{%- for field in node.fields() -%}
+{%- macro child_insts(node) -%}
+{%- for field in node.fields() %}
 rand uvm_reg_field {{get_inst_name(field)}};
-{% endfor -%}
+{%- endfor %}
+{%- endmacro -%}
+
+
+//------------------------------------------------------------------------------
+// Function: coverage
+//------------------------------------------------------------------------------
+{% macro covergroup_inst(node) -%}
+// Function: coverage
+covergroup cg_vals;
+    option.per_instance = 1;
+    {%- for field in node.fields() %}
+    {{ get_inst_name(field) }} : coverpoint {{get_inst_name(field)}}.value[{{field.width-1}}:0];
+    {%- endfor %}
+endgroup : cg_vals
+{%- endmacro %}
+
+
+//------------------------------------------------------------------------------
+// Function: sample_values
+//------------------------------------------------------------------------------
+{% macro sample_values_inst(node) -%}
+// Function: sample_values
+virtual function void sample_values();
+   super.sample_values();
+   if (get_coverage(UVM_CVR_FIELD_VALS)) begin
+       cg_vals.sample();
+   end
+endfunction : sample_values
+{%- endmacro %}
+
+
+//------------------------------------------------------------------------------
+// Function: sample
+//------------------------------------------------------------------------------
+{% macro sample_inst(node) -%}
+// Function: sample
+virtual function void sample(uvm_reg_data_t  data,
+                             uvm_reg_data_t  byte_en,
+                             bit             is_read,
+                             uvm_reg_map     map);
+    cg_vals.sample();
+endfunction : sample
 {%- endmacro %}
 
 
@@ -33,8 +81,14 @@ rand uvm_reg_field {{get_inst_name(field)}};
 // new() function
 //------------------------------------------------------------------------------
 {% macro function_new(node) -%}
+// Function: new
 function new(string name = "{{get_class_name(node)}}");
-    super.new(name, {{node.get_property('regwidth')}}, UVM_NO_COVERAGE);
+    super.new(name, {{node.get_property('regwidth')}}, build_coverage(UVM_CVR_FIELD_VALS));
+    add_coverage(build_coverage(UVM_CVR_FIELD_VALS));
+	if (has_coverage(UVM_CVR_FIELD_VALS)) begin
+        cg_vals = new();
+        cg_vals.set_inst_name(name);
+    end
 endfunction : new
 {%- endmacro %}
 
@@ -43,6 +97,7 @@ endfunction : new
 // build() function
 //------------------------------------------------------------------------------
 {% macro function_build(node) -%}
+// Function build
 virtual function void build();
     {%- for field in node.fields() %}
     {%- if use_uvm_factory %}
@@ -87,6 +142,7 @@ this.{{get_inst_name(node)}}.build();
 this.default_map.add_reg(this.{{get_inst_name(node)}}, {{"'h%x" % node.raw_address_offset}});
 {%- endif %}
 {%- endmacro %}
+
 
 //------------------------------------------------------------------------------
 // Load HDL path slices for this reg instance
