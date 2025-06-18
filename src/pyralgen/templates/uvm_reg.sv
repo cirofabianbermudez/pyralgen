@@ -1,5 +1,6 @@
 {%- import 'utils.sv' as utils with context -%}
 
+
 //------------------------------------------------------------------------------
 // uvm_reg() definition
 //------------------------------------------------------------------------------
@@ -17,9 +18,12 @@ class {{get_class_name(node)}} extends uvm_reg;
 
     {{function_new(node)|indent}}
 
+    {{sample_inst(node)|indent}}
+
     {{sample_values_inst(node)|indent}}
 
     {{function_build(node)|indent}}
+
 endclass : {{get_class_name(node)}}
 {% endif -%}
 {%- endmacro -%}
@@ -28,11 +32,11 @@ endclass : {{get_class_name(node)}}
 //------------------------------------------------------------------------------
 // Child instances
 //------------------------------------------------------------------------------
-{%- macro child_insts(node) -%}
+{% macro child_insts(node) -%}
 {%- for field in node.fields() %}
 rand uvm_reg_field {{get_inst_name(field)}};
 {%- endfor %}
-{%- endmacro -%}
+{%- endmacro %}
 
 
 //------------------------------------------------------------------------------
@@ -50,16 +54,18 @@ endgroup : cg_vals
 
 
 //------------------------------------------------------------------------------
-// Function: sample_values
+// new() function
 //------------------------------------------------------------------------------
-{% macro sample_values_inst(node) -%}
-// Function: sample_values
-virtual function void sample_values();
-   super.sample_values();
-   if (get_coverage(UVM_CVR_FIELD_VALS)) begin
-       cg_vals.sample();
-   end
-endfunction : sample_values
+{% macro function_new(node) -%}
+// Function: new
+function new(string name = "{{get_class_name(node)}}");
+    super.new(name, {{node.get_property('regwidth')}}, build_coverage(UVM_CVR_FIELD_VALS));
+    add_coverage(build_coverage(UVM_CVR_FIELD_VALS));
+	if (has_coverage(UVM_CVR_FIELD_VALS)) begin
+        cg_vals = new();
+        cg_vals.set_inst_name(name);
+    end
+endfunction : new
 {%- endmacro %}
 
 
@@ -78,18 +84,16 @@ endfunction : sample
 
 
 //------------------------------------------------------------------------------
-// new() function
+// Function: sample_values
 //------------------------------------------------------------------------------
-{% macro function_new(node) -%}
-// Function: new
-function new(string name = "{{get_class_name(node)}}");
-    super.new(name, {{node.get_property('regwidth')}}, build_coverage(UVM_CVR_FIELD_VALS));
-    add_coverage(build_coverage(UVM_CVR_FIELD_VALS));
-	if (has_coverage(UVM_CVR_FIELD_VALS)) begin
-        cg_vals = new();
-        cg_vals.set_inst_name(name);
-    end
-endfunction : new
+{% macro sample_values_inst(node) -%}
+// Function: sample_values
+virtual function void sample_values();
+   super.sample_values();
+   if (get_coverage(UVM_CVR_FIELD_VALS)) begin
+       cg_vals.sample();
+   end
+endfunction : sample_values
 {%- endmacro %}
 
 

@@ -31,6 +31,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -50,6 +58,7 @@ package ral_regs_pkg;
             this.feon = uvm_reg_field::type_id::create("feon");
             this.feon.configure(this, 1, 7, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : tdc_reg
 
     // Reg - tdc_ctrl_reg
@@ -80,6 +89,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -99,6 +116,7 @@ package ral_regs_pkg;
             this.endetot = uvm_reg_field::type_id::create("endetot");
             this.endetot.configure(this, 1, 7, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : tdc_ctrl_reg
 
     // Reg - tdc_tpsel_reg
@@ -125,6 +143,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -140,6 +166,7 @@ package ral_regs_pkg;
             this.ch_mode = uvm_reg_field::type_id::create("ch_mode");
             this.ch_mode.configure(this, 2, 6, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : tdc_tpsel_reg
 
     // Reg - afe_tdc_global_reg
@@ -176,6 +203,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -201,6 +236,7 @@ package ral_regs_pkg;
             this.con_pad = uvm_reg_field::type_id::create("con_pad");
             this.con_pad.configure(this, 1, 7, "RW", 0, 'h1, 1, 1, 0);
         endfunction : build
+
     endclass : afe_tdc_global_reg
 
     // Reg - afe_global0_reg
@@ -231,6 +267,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -250,6 +294,7 @@ package ral_regs_pkg;
             this.afe_lb = uvm_reg_field::type_id::create("afe_lb");
             this.afe_lb.configure(this, 1, 7, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : afe_global0_reg
 
     // Reg - afe_global1_reg
@@ -280,6 +325,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -299,6 +352,7 @@ package ral_regs_pkg;
             this.ext_dc = uvm_reg_field::type_id::create("ext_dc");
             this.ext_dc.configure(this, 1, 7, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : afe_global1_reg
 
     // Reg - dac_vth_h_reg
@@ -325,6 +379,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -340,6 +402,7 @@ package ral_regs_pkg;
             this.en_dac = uvm_reg_field::type_id::create("en_dac");
             this.en_dac.configure(this, 1, 7, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : dac_vth_h_reg
 
     // Reg - dac_vth_l_reg
@@ -366,6 +429,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -381,6 +452,7 @@ package ral_regs_pkg;
             this.en_dac = uvm_reg_field::type_id::create("en_dac");
             this.en_dac.configure(this, 1, 7, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : dac_vth_l_reg
 
     // Reg - dac_vinj_h_reg
@@ -407,6 +479,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -422,6 +502,7 @@ package ral_regs_pkg;
             this.en_dac = uvm_reg_field::type_id::create("en_dac");
             this.en_dac.configure(this, 1, 7, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : dac_vinj_h_reg
 
     // Reg - dac_vinj_l_reg
@@ -448,6 +529,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -463,6 +552,7 @@ package ral_regs_pkg;
             this.en_dac = uvm_reg_field::type_id::create("en_dac");
             this.en_dac.configure(this, 1, 7, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : dac_vinj_l_reg
 
     // Reg - dac_vldo_reg
@@ -489,6 +579,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -504,6 +602,7 @@ package ral_regs_pkg;
             this.en_dac = uvm_reg_field::type_id::create("en_dac");
             this.en_dac.configure(this, 1, 7, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : dac_vldo_reg
 
     // Reg - dac_vfb_reg
@@ -530,6 +629,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -545,6 +652,7 @@ package ral_regs_pkg;
             this.en_dac = uvm_reg_field::type_id::create("en_dac");
             this.en_dac.configure(this, 1, 7, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : dac_vfb_reg
 
     // Reg - ftdac_reg
@@ -571,6 +679,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -586,6 +702,7 @@ package ral_regs_pkg;
             this.ft_dac1 = uvm_reg_field::type_id::create("ft_dac1");
             this.ft_dac1.configure(this, 4, 4, "RW", 0, 'hf, 1, 1, 0);
         endfunction : build
+
     endclass : ftdac_reg
 
     // Reg - cmd_reg
@@ -622,6 +739,14 @@ package ral_regs_pkg;
             end
         endfunction : new
 
+        // Function: sample
+        virtual function void sample(uvm_reg_data_t  data,
+                                     uvm_reg_data_t  byte_en,
+                                     bit             is_read,
+                                     uvm_reg_map     map);
+            cg_vals.sample();
+        endfunction : sample
+
         // Function: sample_values
         virtual function void sample_values();
            super.sample_values();
@@ -647,6 +772,7 @@ package ral_regs_pkg;
             this.daqres = uvm_reg_field::type_id::create("daqres");
             this.daqres.configure(this, 1, 7, "RW", 0, 'h0, 1, 1, 0);
         endfunction : build
+
     endclass : cmd_reg
 
     // Map Coverage Object
@@ -915,13 +1041,14 @@ package ral_regs_pkg;
 
         // Function: build
         virtual function void build();
-            this.default_map = create_map("reg_map", 0, 1, UVM_NO_ENDIAN);
 
             if(has_coverage(UVM_CVR_ADDR_MAP)) begin
                 default_map_cg = mattonella_reg_block_default_map_coverage::type_id::create("default_map_cg");
                 default_map_cg.ra_cov.set_inst_name(this.get_full_name());
                 void'(set_coverage(UVM_CVR_ADDR_MAP));
             end
+
+            this.default_map = create_map("default_map", 0, 1, UVM_NO_ENDIAN);
             
             this.SET_TDC_DCO1_00 = tdc_reg::type_id::create("SET_TDC_DCO1_00");
             this.SET_TDC_DCO1_00.configure(this);
@@ -1471,7 +1598,7 @@ package ral_regs_pkg;
         endfunction : build
 
         // Function: sample
-        protected virtual function void sample(uvm_reg_addr_t offset, bit is_read, uvm_reg_map map);
+        function void sample(uvm_reg_addr_t offset, bit is_read, uvm_reg_map map);
            if(get_coverage(UVM_CVR_ADDR_MAP)) begin
               if(map.get_name() == "default_map") begin
                  default_map_cg.sample(offset, is_read);

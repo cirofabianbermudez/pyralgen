@@ -1,5 +1,6 @@
 {%- import 'utils.sv' as utils with context -%}
 
+
 //------------------------------------------------------------------------------
 // uvm_reg_block() definition
 //------------------------------------------------------------------------------
@@ -68,13 +69,14 @@ endfunction : new
 {% macro function_build(node) -%}
 // Function: build
 virtual function void build();
-    this.default_map = create_map("reg_map", 0, {{get_bus_width(node)}}, {{get_endianness(node)}});
 
     if(has_coverage(UVM_CVR_ADDR_MAP)) begin
         default_map_cg = {{get_class_name(node)}}_default_map_coverage::type_id::create("default_map_cg");
         default_map_cg.ra_cov.set_inst_name(this.get_full_name());
         void'(set_coverage(UVM_CVR_ADDR_MAP));
     end
+
+    this.default_map = create_map("default_map", 0, {{get_bus_width(node)}}, {{get_endianness(node)}});
     {% for child in node.children() -%}
         {%- if isinstance(child, RegNode) -%}
             {{uvm_reg.build_instance(child)|indent}}
@@ -228,7 +230,7 @@ endfunction: sample
 //------------------------------------------------------------------------------
 {% macro function_sample(node) -%}
 // Function: sample
-protected virtual function void sample(uvm_reg_addr_t offset, bit is_read, uvm_reg_map map);
+function void sample(uvm_reg_addr_t offset, bit is_read, uvm_reg_map map);
    if(get_coverage(UVM_CVR_ADDR_MAP)) begin
       if(map.get_name() == "default_map") begin
          default_map_cg.sample(offset, is_read);
