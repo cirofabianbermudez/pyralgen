@@ -36,34 +36,33 @@ pyralgen -c registers.rdl -o ral_regs_pkg.sv
 
 ## Integration
 
-Inside the `top_env.sv` make sure you have the following:
+Inside the `top_env.sv` make sure to **enable coverage models for register model** before
+creating the register model and **enable sampling of coverage** after building the register
+model.
 
 ```verilog
 class top_env extends uvm_env;
 
   `uvm_component_utils(top_env)
 
-  ...
-  // MATT PROTOCOL UVC Register Model integration
-  mattonella_reg_block                                 regmodel;
-  matt_protocol_uvc_adapter                            m_reg2bus;
-  uvm_reg_predictor #(matt_protocol_uvc_sequence_item) m_bus2reg_predictor;
-  ...
-
-
   function void top_env::build_phase(uvm_phase phase);
     ...
-    // MATT PROTOCOL UVC Register Model integration
     if (regmodel == null) begin
-      // Enable Coverage models for register model
-      uvm_reg::include_coverage("*", UVM_CVR_ALL);  // <- You need to add this line
-      regmodel = mattonella_reg_block::type_id::create("regmodel", this);
-      uvm_config_db #(mattonella_reg_block)::set(this, "", "regmodel", regmodel);
+
+      // Enable Coverage models for register model   <- Add this
+      uvm_reg::include_coverage("*", UVM_CVR_ALL);
+
+      // Create and build the register model
+      regmodel = ral_reg_block::type_id::create("regmodel", this);
+      uvm_config_db #(ral_reg_block)::set(this, "", "regmodel", regmodel);
       regmodel.build();
-      // Enable sampling of coverage
+
+      // Enable sampling of coverage         <- Add this
       if (m_config.coverage_enable) begin
-        regmodel.set_coverage(UVM_CVR_ALL);     // <- You need also to add this
+        regmodel.set_coverage(UVM_CVR_ALL);
       end
+
+      // Lock and reset
       regmodel.lock_model();
       regmodel.reset()
     end
