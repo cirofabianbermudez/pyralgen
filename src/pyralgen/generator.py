@@ -4,8 +4,6 @@ import sys
 from systemrdl import RDLCompiler, RDLCompileError
 from peakrdl_uvm import UVMExporter
 
-logger = logging.getLogger(__name__)
-
 def generate_ral(
     config_path: Path, 
     templates_dir: Path, 

@@ -1,14 +1,16 @@
 # pyralgen
 
-`pyralgen` is a lightweight Python-based UVM-RAL code generator that leverages
-[SystemRDL](https://www.accellera.org/downloads/standards/systemrdl) to describe
-the registers and adds to [PeakRDL-uvm](https://github.com/SystemRDL/PeakRDL-uvm)
-the register coverage functionality.
+`pyralgen` is a lightweight Python-based UVM-RAL code generator. It leverages the
+[SystemRDL](https://www.accellera.org/downloads/standards/systemrdl) standard to describe
+the register specifications and extends the [PeakRDL-uvm](https://github.com/SystemRDL/PeakRDL-uvm)
+framework to include build-in register coverage support.
 
 ## Features
-- Generates UVM-RAL code with coverage
-- Easy to extend the given templates
-- Following industry best practices
+
+- UVM-RAL code generation with automatic coverage model insertion
+- Template-driven: easily extend or override code templates
+- Industry best practices: idiomatic, maintainable SystemVerilog output
+- Configurable: enable or disable coverage, factory usage, and more via CLI options
 
 ## Prerequisites
 
@@ -16,10 +18,21 @@ the register coverage functionality.
 
 ## Installing
 
-Install using the given script because it's still under development:
+**Note:** `pyralgen` is still under active development.
+
+Clone the repository and set up the Python environment :
 
 ```bash
+# Clone project
+git clone https://github.com/cirofabianbermudez/pyralgen.git
+cd pyralgen
+
+# Bootstrap Python venv and install deps
 ./scripts/setup/setup_python_env.sh
+source .venv/bin/activate
+
+# Verify installation
+pyuvcgen -h
 ```
 
 ## Example
@@ -27,9 +40,6 @@ Install using the given script because it's still under development:
 The easiest way to use `pyralgen` is via the command line tool:
 
 ```bash
-# Verify installation
-pyralgen -h
-
 # Generate UVM-RAL
 pyralgen -c registers.rdl -o ral_regs_pkg.sv
 ```
@@ -49,7 +59,7 @@ class top_env extends uvm_env;
     ...
     if (regmodel == null) begin
 
-      // Enable Coverage models for register model   <- Add this
+      // Enable Coverage models for register model <- Add this
       uvm_reg::include_coverage("*", UVM_CVR_ALL);
 
       // Create and build the register model
@@ -57,7 +67,7 @@ class top_env extends uvm_env;
       uvm_config_db #(ral_reg_block)::set(this, "", "regmodel", regmodel);
       regmodel.build();
 
-      // Enable sampling of coverage         <- Add this
+      // Enable sampling of coverage               <- Add this
       if (m_config.coverage_enable) begin
         regmodel.set_coverage(UVM_CVR_ALL);
       end
@@ -91,8 +101,6 @@ class top_env extends uvm_env;
     ```
 
 ## License
-
-TODO
 
 ## Contributing
 

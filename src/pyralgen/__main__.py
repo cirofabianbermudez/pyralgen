@@ -12,8 +12,8 @@ def main() -> None:
         "-c",
         "--config",
         type=Path,
-        # required=True,
-        default=script_dir / "rdl/example.rdl",
+        required=True,
+        #default=script_dir / "rdl/example.rdl",
         help="SystemRDL configuration file",
     )
     parser.add_argument(
@@ -28,7 +28,7 @@ def main() -> None:
         "--output",
         type=Path,
         default=Path("ral_regs_pkg.sv"),
-        help="Output directory",
+        help="Output filename",
     )
 
     args = parser.parse_args()
