@@ -1,17 +1,13 @@
 //=============================================================================
 // [Filename]       ral.rdl
-// [Project]        IGNITE64
-// [Author]         Ciro Bermudez - cirofabian.bermudezmarquez@ba.infn.it
+// [Project]        -
+// [Author]         Ciro Bermudez - cirofabian.bermudez@gmail.com
 // [Language]       SystemRDL 2.0 (Register Description Language)
 // [Created]        Nov 2024
 // [Modified]       -
-// [Description]    SystemRDL file to describe and manage the registers inside
-//                  Mattonella
-// [Notes]          This file is the input for PeakRDL-uvm
-//                  Use this command to generate the UVM register model
-//                  ./rdl_utils.py -rdl ral_mattonella.rdl -out mattonella_regs.sv
-//                  Consider using (UDP) User Defined Properties
-// [Status]         -
+// [Description]    SystemRDL file to describe and manage the registers
+// [Notes]          -
+// [Status]         devel
 // [Revisions]      -
 //=============================================================================
 
@@ -327,68 +323,6 @@ addrmap mattonella_reg_block {
     // Instantiate the TDC registers
     tdc_reg              SET_TDC_DCO1_00     @ 00;
     tdc_reg              SET_TDC_DCO1_01     @ 01;
-    tdc_reg              SET_TDC_DCO1_02     @ 02;
-    tdc_reg              SET_TDC_DCO1_03     @ 03;
-    tdc_reg              SET_TDC_DCO1_04     @ 04;
-    tdc_reg              SET_TDC_DCO1_05     @ 05;
-    tdc_reg              SET_TDC_DCO1_06     @ 06;
-    tdc_reg              SET_TDC_DCO1_07     @ 07;
-    tdc_reg              SET_TDC_DCO1_08     @ 08;
-    tdc_reg              SET_TDC_DCO1_09     @ 09;
-    tdc_reg              SET_TDC_DCO1_10     @ 10;
-    tdc_reg              SET_TDC_DCO1_11     @ 11;
-    tdc_reg              SET_TDC_DCO1_12     @ 12;
-    tdc_reg              SET_TDC_DCO1_13     @ 13;
-    tdc_reg              SET_TDC_DCO1_14     @ 14;
-    tdc_reg              SET_TDC_DCO1_15     @ 15;
-    tdc_reg              SET_TDC_DCO1_16     @ 16;
-    tdc_reg              SET_TDC_DCO1_17     @ 17;
-    tdc_reg              SET_TDC_DCO1_18     @ 18;
-    tdc_reg              SET_TDC_DCO1_19     @ 19;
-    tdc_reg              SET_TDC_DCO1_20     @ 20;
-    tdc_reg              SET_TDC_DCO1_21     @ 21;
-    tdc_reg              SET_TDC_DCO1_22     @ 22;
-    tdc_reg              SET_TDC_DCO1_23     @ 23;
-    tdc_reg              SET_TDC_DCO1_24     @ 24;
-    tdc_reg              SET_TDC_DCO1_25     @ 25;
-    tdc_reg              SET_TDC_DCO1_26     @ 26;
-    tdc_reg              SET_TDC_DCO1_27     @ 27;
-    tdc_reg              SET_TDC_DCO1_28     @ 28;
-    tdc_reg              SET_TDC_DCO1_29     @ 29;
-    tdc_reg              SET_TDC_DCO1_30     @ 30;
-    tdc_reg              SET_TDC_DCO1_31     @ 31;
-    tdc_reg              SET_TDC_DCO1_32     @ 32;
-    tdc_reg              SET_TDC_DCO1_33     @ 33;
-    tdc_reg              SET_TDC_DCO1_34     @ 34;
-    tdc_reg              SET_TDC_DCO1_35     @ 35;
-    tdc_reg              SET_TDC_DCO1_36     @ 36;
-    tdc_reg              SET_TDC_DCO1_37     @ 37;
-    tdc_reg              SET_TDC_DCO1_38     @ 38;
-    tdc_reg              SET_TDC_DCO1_39     @ 39;
-    tdc_reg              SET_TDC_DCO1_40     @ 40;
-    tdc_reg              SET_TDC_DCO1_41     @ 41;
-    tdc_reg              SET_TDC_DCO1_42     @ 42;
-    tdc_reg              SET_TDC_DCO1_43     @ 43;
-    tdc_reg              SET_TDC_DCO1_44     @ 44;
-    tdc_reg              SET_TDC_DCO1_45     @ 45;
-    tdc_reg              SET_TDC_DCO1_46     @ 46;
-    tdc_reg              SET_TDC_DCO1_47     @ 47;
-    tdc_reg              SET_TDC_DCO1_48     @ 48;
-    tdc_reg              SET_TDC_DCO1_49     @ 49;
-    tdc_reg              SET_TDC_DCO1_50     @ 50;
-    tdc_reg              SET_TDC_DCO1_51     @ 51;
-    tdc_reg              SET_TDC_DCO1_52     @ 52;
-    tdc_reg              SET_TDC_DCO1_53     @ 53;
-    tdc_reg              SET_TDC_DCO1_54     @ 54;
-    tdc_reg              SET_TDC_DCO1_55     @ 55;
-    tdc_reg              SET_TDC_DCO1_56     @ 56;
-    tdc_reg              SET_TDC_DCO1_57     @ 57;
-    tdc_reg              SET_TDC_DCO1_58     @ 58;
-    tdc_reg              SET_TDC_DCO1_59     @ 59;
-    tdc_reg              SET_TDC_DCO1_60     @ 60;
-    tdc_reg              SET_TDC_DCO1_61     @ 61;
-    tdc_reg              SET_TDC_DCO1_62     @ 62;
-    tdc_reg              SET_TDC_DCO1_63     @ 63;
 
     // Instantiate TDC Control All
     tdc_ctrl_reg         SET_TDC_CTRL_ALL    @ 64;
@@ -399,50 +333,12 @@ addrmap mattonella_reg_block {
 
     // Instantiate Global setting configurations
     afe_tdc_global_reg   SET_AFE_TDC_GLOBAL  @ 67;
-    afe_global0_reg      SET_AFE_GLOBAL_0    @ 68;
-    afe_global1_reg      SET_AFE_GLOBAL_1    @ 69;
 
     // Instantiate DAC Voltage configurations
     dac_vth_h_reg        SET_DAC_VTH_H       @ 70;
-    dac_vth_l_reg        SET_DAC_VTH_L       @ 71;
-    dac_vinj_h_reg       SET_DAC_VINJ_H      @ 72;
-    dac_vinj_l_reg       SET_DAC_VINJ_L      @ 73;
-    dac_vldo_reg         SET_DAC_VLDO        @ 74;
-    dac_vfb_reg          SET_DAC_VFB         @ 75;
 
     // Instantiate FTDAC registers
     ftdac_reg            SET_FTFAC_01_00     @ 76;
-    ftdac_reg            SET_FTFAC_03_02     @ 77;
-    ftdac_reg            SET_FTFAC_05_04     @ 78;
-    ftdac_reg            SET_FTFAC_07_06     @ 79;
-    ftdac_reg            SET_FTFAC_09_08     @ 80;
-    ftdac_reg            SET_FTFAC_11_10     @ 81;
-    ftdac_reg            SET_FTFAC_13_12     @ 82;
-    ftdac_reg            SET_FTFAC_15_14     @ 83;
-    ftdac_reg            SET_FTFAC_17_16     @ 84;
-    ftdac_reg            SET_FTFAC_19_18     @ 85;
-    ftdac_reg            SET_FTFAC_21_20     @ 86;
-    ftdac_reg            SET_FTFAC_23_22     @ 87;
-    ftdac_reg            SET_FTFAC_25_24     @ 88;
-    ftdac_reg            SET_FTFAC_27_26     @ 89;
-    ftdac_reg            SET_FTFAC_29_28     @ 90;
-    ftdac_reg            SET_FTFAC_31_30     @ 91;
-    ftdac_reg            SET_FTFAC_33_32     @ 92;
-    ftdac_reg            SET_FTFAC_35_34     @ 93;
-    ftdac_reg            SET_FTFAC_37_36     @ 94;
-    ftdac_reg            SET_FTFAC_39_38     @ 95;
-    ftdac_reg            SET_FTFAC_41_40     @ 96;
-    ftdac_reg            SET_FTFAC_43_42     @ 97;
-    ftdac_reg            SET_FTFAC_45_44     @ 98;
-    ftdac_reg            SET_FTFAC_47_46     @ 99;
-    ftdac_reg            SET_FTFAC_49_48     @ 100;
-    ftdac_reg            SET_FTFAC_51_50     @ 101;
-    ftdac_reg            SET_FTFAC_53_52     @ 102;
-    ftdac_reg            SET_FTFAC_55_54     @ 103;
-    ftdac_reg            SET_FTFAC_57_56     @ 104;
-    ftdac_reg            SET_FTFAC_59_58     @ 105;
-    ftdac_reg            SET_FTFAC_61_60     @ 106;
-    ftdac_reg            SET_FTFAC_63_62     @ 107;
     
     // Instantiate command register
     cmd_reg              COMMAND             @ 112;
