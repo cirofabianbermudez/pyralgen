@@ -38,7 +38,7 @@ def main() -> None:
         format="[%(levelname)s]: %(message)s",
     )
 
-    logging.info("Starting UVC generation...")
+    logging.info("Starting UVM-RAL generation...")
 
     generate_ral(
         config_path=args.config,

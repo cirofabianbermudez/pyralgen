@@ -24,37 +24,23 @@ default hw = r;
 // Default: 8'h1F or 8'b0001_1111
 // ==============================================================================
 reg tdc_reg {
-  name = "Pixel settings";
-  desc = "There registers are used to Set/Get the values related to the single pixel";
+  name = "";
+  desc = "";
   field {
-    name = "Front End on Bit";
-    desc = "Set/Get if FE is switched ON/OFF
-
-            - 0: FE is powered OFF.
-            - 1: FE is powered ON.";
+    name = "";
+    desc = "";
   } feon[7:7] = 1'b0;
   field {
-    name = "Pixel On Bit";
-    desc = "Set/Get TDC pixel input
-
-            - 0: TDC pixel is forced to ignore any input. Also the Calibration is skipped.
-            - 1: TDC pixel is connected to input. Also the Calibration is performed.";
+    name = "";
+    desc = "";
   } pxon[6:6] = 1'b0;
   field {
-    name = "Adjust Bits";
-    desc = "Set/Get the coarse delay DC01
-
-            - 0: Max delay, max DCO period.
-            - 1,2: DCO Period is reduced of about 48ps. Code 1 and 2 are equivalent.
-            - 3: DCO Period is reduced by a further 48ps approximately. ";
+    name = "";
+    desc = "";
   } adj1[5:4] = 2'b01;
   field {
-    name = "Control Bits";
-    desc = "Set/Get the fine delay for DCO1
-
-           - 0: Max delay, max DCO period.
-           - 1->14: DCO Period is reduced of about 2.5ps.
-           - 15: Equivalent to code 14. ";
+    name = "";
+    desc = "";
   } ctrl1[3:0] = 4'b1111;
 };
 
@@ -65,18 +51,22 @@ reg tdc_reg {
 // ==============================================================================
 reg tdc_ctrl_reg {
   name = "";
-  desc = "This register is used to Set/get the values related the TDC global settings.";
+  desc = "";
   field {
-    desc = "Set/Get the Double Edge more for TOT/calibration counter";
+    name = "";
+    desc = "";
   } endetot[7:7] = 1'b0;
   field {
-    desc = "Set/Get TDCs ON/OFF";
+    name = "";
+    desc = "";
   } tdcon[6:6] = 1'b0;
   field {
-    desc = "Set/Get the coarse delay for DCO0";
+    name = "";
+    desc = "";
   } adj0[5:4] = 2'b01;
   field {
-    desc = "Set/Get the fine delay for DCO0";
+    name = "";
+    desc = "";
   } ctrl0[3:0] = 4'b0000;
 };
 
@@ -333,12 +323,20 @@ addrmap mattonella_reg_block {
 
     // Instantiate Global setting configurations
     afe_tdc_global_reg   SET_AFE_TDC_GLOBAL  @ 67;
+    afe_global0_reg      SET_AFE_GLOBAL_0    @ 68;
+    afe_global1_reg      SET_AFE_GLOBAL_1    @ 69;
 
     // Instantiate DAC Voltage configurations
     dac_vth_h_reg        SET_DAC_VTH_H       @ 70;
+    dac_vth_l_reg        SET_DAC_VTH_L       @ 71;
+    dac_vinj_h_reg       SET_DAC_VINJ_H      @ 72;
+    dac_vinj_l_reg       SET_DAC_VINJ_L      @ 73;
+    dac_vldo_reg         SET_DAC_VLDO        @ 74;
+    dac_vfb_reg          SET_DAC_VFB         @ 75;
 
     // Instantiate FTDAC registers
     ftdac_reg            SET_FTFAC_01_00     @ 76;
+    ftdac_reg            SET_FTFAC_03_02     @ 77;
     
     // Instantiate command register
     cmd_reg              COMMAND             @ 112;

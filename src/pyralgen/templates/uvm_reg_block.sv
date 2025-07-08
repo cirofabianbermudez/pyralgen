@@ -213,7 +213,7 @@ endfunction: sample
 // function_sample_map_values() function
 //------------------------------------------------------------------------------
 {% macro function_sample_map_values(node) -%}
-// Function: collect_values
+// Function: sample_map_values
 function void sample_map_values(uvm_reg_addr_t offset, bit is_read, uvm_reg_map map);
    if(get_coverage(UVM_CVR_ADDR_MAP)) begin
       if(map.get_name() == "default_map") begin

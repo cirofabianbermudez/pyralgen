@@ -4,8 +4,13 @@ import sys
 from systemrdl import RDLCompiler, RDLCompileError
 from peakrdl_uvm import UVMExporter
 
+logger = logging.getLogger(__name__)
 
-def generate_ral(config_path: Path, templates_dir: Path, output_dir: Path) -> None:
+def generate_ral(
+    config_path: Path, 
+    templates_dir: Path, 
+    output_dir: Path
+) -> None:
     """
     Generate UVM RAL code from SystemRDL
     """
@@ -21,8 +26,8 @@ def generate_ral(config_path: Path, templates_dir: Path, output_dir: Path) -> No
         root = rdlc.elaborate()
         exporter = UVMExporter(user_template_dir=templates_dir.as_posix())
         exporter.export(
-            root,
-            output_dir.as_posix(),
+            node=root,
+            path=output_dir.as_posix(),
             export_as_package=True,
             reuse_class_definitions=True,
             use_uvm_factory=True,
