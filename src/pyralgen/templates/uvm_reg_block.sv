@@ -33,7 +33,7 @@ class {{get_class_name(node)}} extends uvm_reg_block;
 
     {{function_build(node)|indent}}
 
-    {{function_sample(node)|indent}}
+    {{function_sample_map_values(node)|indent}}
 
 endclass : {{get_class_name(node)}}
 {% endif -%}
@@ -210,15 +210,16 @@ endfunction: sample
 
 
 //------------------------------------------------------------------------------
-// function_sample() function
+// function_sample_map_values() function
 //------------------------------------------------------------------------------
-{% macro function_sample(node) -%}
-// Function: sample
-function void sample(uvm_reg_addr_t offset, bit is_read, uvm_reg_map map);
+{% macro function_sample_map_values(node) -%}
+// Function: collect_values
+function void sample_map_values(uvm_reg_addr_t offset, bit is_read, uvm_reg_map map);
    if(get_coverage(UVM_CVR_ADDR_MAP)) begin
       if(map.get_name() == "default_map") begin
          default_map_cg.sample(offset, is_read);
+         `uvm_info(get_type_name(), $sformatf("SAMPLE_MAP_VALUES: %3d %3d", offset, is_read), UVM_DEBUG)
       end
    end
-endfunction: sample
+endfunction: sample_map_values
 {%- endmacro %}

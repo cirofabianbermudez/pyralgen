@@ -3,5 +3,7 @@
 package {{package_name}};
     `include "uvm_macros.svh"
     import uvm_pkg::*;
+
+    typedef class {{get_inst_name(top_node)}};
     {{ main.top()|indent }}
 endpackage: {{package_name}}

@@ -14,11 +14,15 @@ class {{get_class_name(node)}} extends uvm_reg;
 
     {{child_insts(node)|indent}}
 
+    {{get_inst_name(top_node)}} reg_block;
+
     {{covergroup_inst(node)|indent}}
 
     {{function_new(node)|indent}}
 
-    {{sample_inst(node)|indent}}
+    {{post_write_inst(node)|indent}}
+
+    {{post_read_inst(node)|indent}}
 
     {{sample_values_inst(node)|indent}}
 
@@ -98,11 +102,48 @@ endfunction : sample_values
 
 
 //------------------------------------------------------------------------------
+// Function: post_write
+//------------------------------------------------------------------------------
+{% macro post_write_inst(node) -%}
+// Function: post_write
+virtual task post_write(uvm_reg_item rw);
+    super.post_write(rw);
+    if (rw.status == UVM_IS_OK && rw.map != null) begin
+        uvm_reg_addr_t offset = get_address(rw.map);
+        reg_block.sample_map_values(offset, 0, rw.map);
+        this.sample_values();
+        `uvm_info(get_type_name(), $sformatf("POST_WRITE"), UVM_DEBUG)
+    end
+endtask : post_write
+{%- endmacro %}
+
+
+//------------------------------------------------------------------------------
+// Function: post_read
+//------------------------------------------------------------------------------
+{% macro post_read_inst(node) -%}
+// Function: post_read
+virtual task post_read(uvm_reg_item rw);
+    super.post_read(rw);
+    if (rw.status == UVM_IS_OK && rw.map != null) begin
+        uvm_reg_addr_t offset = get_address(rw.map);
+        reg_block.sample_map_values(offset, 1, rw.map);
+        this.sample_values();
+        `uvm_info(get_type_name(), $sformatf("POST_READ"), UVM_DEBUG)
+    end
+endtask : post_read
+{%- endmacro %}
+
+
+//------------------------------------------------------------------------------
 // build() function
 //------------------------------------------------------------------------------
 {% macro function_build(node) -%}
 // Function build
 virtual function void build();
+    if(!$cast(reg_block, get_parent())) begin
+        `uvm_fatal("CAST_ERROR", "Cannot get parent reg_block")
+    end
     {%- for field in node.fields() %}
     {%- if use_uvm_factory %}
     this.{{get_inst_name(field)}} = uvm_reg_field::type_id::create("{{get_inst_name(field)}}");
