@@ -34,6 +34,41 @@ pyralgen -h
 pyralgen -c registers.rdl -o ral_regs_pkg.sv
 ```
 
+## Integration
+
+Inside the `top_env.sv` make sure you have the following:
+
+```verilog
+class top_env extends uvm_env;
+
+  `uvm_component_utils(top_env)
+
+  ...
+  // MATT PROTOCOL UVC Register Model integration
+  mattonella_reg_block                                 regmodel;
+  matt_protocol_uvc_adapter                            m_reg2bus;
+  uvm_reg_predictor #(matt_protocol_uvc_sequence_item) m_bus2reg_predictor;
+  ...
+
+
+  function void top_env::build_phase(uvm_phase phase);
+    ...
+    // MATT PROTOCOL UVC Register Model integration
+    if (regmodel == null) begin
+      // Enable Coverage models for register model
+      uvm_reg::include_coverage("*", UVM_CVR_ALL);  // <- You need to add this line
+      regmodel = mattonella_reg_block::type_id::create("regmodel", this);
+      uvm_config_db #(mattonella_reg_block)::set(this, "", "regmodel", regmodel);
+      regmodel.build();
+      // Enable sampling of coverage
+      if (m_config.coverage_enable) begin
+        regmodel.set_coverage(UVM_CVR_ALL);     // <- You need also to add this
+      end
+      regmodel.lock_model();
+      regmodel.reset()
+    end
+```
+
 ## Development
 
 1. Clone de repository and navigate to its root directory:
